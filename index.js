@@ -19,12 +19,13 @@ const saveJson = (path, data) => {
 program
     .command('add [todo]')
     .description("Adiciona um to-do")
-    .action(todo => {
+    .option('-s, --status [status]', 'Status inicial do to-do')
+    .action((todo, option) => {
         if(!todo) return;
         const data = getJson(todosPath);
         data.push({
             title: todo,
-            done: false,
+            done: option.status == "true" ? true : false,
         });
         saveJson(todosPath, data)
     });
