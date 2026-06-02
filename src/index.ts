@@ -38,12 +38,22 @@ program
   .description("Atualiza um to-do")
   .option("-t, --todo, <todo>", "A fazer do to-do")
   .option("-s, --status, <status>", "Status do to-do")
+  .option("-d, --delete", "Deletar do to-do")
   .action((id, options) => {
     if (!id) {
       console.log("Defina o ID do todo a ser atualizado");
       return;
     }
-    if (!options.todo && !options.status) {
+    if (options.delete) {
+      const data = getJson(todosPath);
+      const todoDeleted = data.filter((todo: any) => {
+        return todo.id != id;
+      });
+      saveJson(todosPath, todoDeleted);
+      console.log("to-do deletado - ID #" + id);
+      return;
+    }
+    if (!options.todo && !options.status && !options.delete) {
       console.log("Defina pelo menos uma acao de atualizacao para o todo");
       return;
     }
