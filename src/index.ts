@@ -25,10 +25,12 @@ program
     if (!todo) return;
     const data = getJson(todosPath);
     data.push({
+      id: data.length + 1,
       title: todo,
       done: option.status == "true" ? true : false,
     });
     saveJson(todosPath, data);
+    console.log("to-do adicionado - ID #" + data.length);
   });
 
 program.parse();
