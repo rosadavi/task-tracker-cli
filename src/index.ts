@@ -20,7 +20,6 @@ const saveJson = (path: string, data: JSON) => {
 program
   .command("add [todo]")
   .description("Adiciona um to-do")
-  .option("-s, --status [status]", "Status inicial do to-do")
   .action((todo, option) => {
     if (!todo) return;
     const data = getJson(todosPath);
@@ -28,7 +27,7 @@ program
     data.push({
       id: id == undefined ? 1 : id + 1,
       title: todo,
-      done: option.status == "true" ? true : false,
+      status: "created",
     });
     saveJson(todosPath, data);
     console.log("to-do adicionado - ID #" + data.id);
@@ -64,7 +63,7 @@ program
         return {
           ...todo,
           title: options.todo ? options.todo : todo.title,
-          done: options.status ? options.status : todo.done,
+          status: options.status ? options.status : todo.status,
         };
       }
 
