@@ -24,13 +24,14 @@ program
   .action((todo, option) => {
     if (!todo) return;
     const data = getJson(todosPath);
+    const id = data.at(-1)?.id;
     data.push({
-      id: data.length + 1,
+      id: id == undefined ? 1 : id + 1,
       title: todo,
       done: option.status == "true" ? true : false,
     });
     saveJson(todosPath, data);
-    console.log("to-do adicionado - ID #" + data.length);
+    console.log("to-do adicionado - ID #" + data.id);
   });
 
 program
