@@ -73,4 +73,44 @@ program
     console.log("to-do atualizado - ID #" + id);
   });
 
+program
+  .command("list")
+  .description("Lista todo o to-do com parametros")
+  .option("-d, --done,", "Concluidos")
+  .option("-c, --created,", "Nao concluidos")
+  .option("-i, --inprogress,", "Em progresso")
+  .action((options) => {
+    const data = getJson(todosPath);
+
+    if (options.done) {
+      const done = data.filter((todo: any) => {
+        return todo.status == "done";
+      });
+
+      console.log(done);
+      return;
+    }
+
+    if (options.created) {
+      const created = data.filter((todo: any) => {
+        return todo.status == "created";
+      });
+
+      console.log(created);
+      return;
+    }
+
+    if (options.inprogress) {
+      const inProgress = data.filter((todo: any) => {
+        return todo.status == "in progress";
+      });
+
+      console.log(inProgress);
+      return;
+    }
+
+    console.log("Nao foi possivle encontrar tarefas com esse parametro");
+    return;
+  });
+
 program.parse();
