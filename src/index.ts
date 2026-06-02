@@ -28,6 +28,7 @@ program
       id: id == undefined ? 1 : id + 1,
       title: todo,
       status: "created",
+      created_at: new Date(),
     });
     saveJson(todosPath, data);
     console.log("to-do adicionado - ID #" + data.id);
@@ -64,6 +65,7 @@ program
           ...todo,
           title: options.todo ? options.todo : todo.title,
           status: options.status ? options.status : todo.status,
+          update_at: new Date()
         };
       }
 
