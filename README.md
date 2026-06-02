@@ -147,6 +147,12 @@ todo list --done
 - commander
 - JSON como armazenamento local
 
+## Origem do Projeto
+
+Este projeto foi inspirado no desafio do roadmap.sh:
+
+- https://roadmap.sh/projects/task-tracker
+
 ## Licença
 
 Este projeto está sob a licença ISC.
