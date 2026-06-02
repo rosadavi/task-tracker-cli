@@ -33,4 +33,34 @@ program
     console.log("to-do adicionado - ID #" + data.length);
   });
 
+program
+  .command("upd [id]")
+  .description("Atualiza um to-do")
+  .option("-t, --todo, <todo>", "A fazer do to-do")
+  .option("-s, --status, <status>", "Status do to-do")
+  .action((id, options) => {
+    if (!id) {
+      console.log("Defina o ID do todo a ser atualizado");
+      return;
+    }
+    if (!options.todo && !options.status) {
+      console.log("Defina pelo menos uma acao de atualizacao para o todo");
+      return;
+    }
+    const data = getJson(todosPath);
+    const todoUpdated = data.map((todo: any) => {
+      if (todo.id == id) {
+        return {
+          ...todo,
+          title: options.todo ? options.todo : todo.title,
+          done: options.status ? options.status : todo.done,
+        };
+      }
+
+      return todo;
+    });
+    saveJson(todosPath, todoUpdated);
+    console.log("to-do atualizado - ID #" + id);
+  });
+
 program.parse();
