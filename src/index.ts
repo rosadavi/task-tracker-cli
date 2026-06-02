@@ -31,7 +31,7 @@ program
       created_at: new Date(),
     });
     saveJson(todosPath, data);
-    console.log("to-do adicionado - ID #" + data.id);
+    console.log(`to-do adicionado - ID #${id == undefined ? 1 : id + 1}`);
   });
 
 program
@@ -65,7 +65,7 @@ program
           ...todo,
           title: options.todo ? options.todo : todo.title,
           status: options.status ? options.status : todo.status,
-          update_at: new Date()
+          update_at: new Date(),
         };
       }
 
